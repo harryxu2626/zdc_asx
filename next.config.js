@@ -18,6 +18,7 @@ const nextConfig = {
   //   )
   //   return config
   // }
+  basePath: '/harryxu2626.github.io',
   output: 'export',
   distDir: '/dist',
   images: {
