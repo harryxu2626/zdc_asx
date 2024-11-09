@@ -1,55 +1,237 @@
 import Head from 'next/head';
 
+import * as React from "react"
 import Layout from '@components/Layout';
 import Section from '@components/Section';
 import Container from '@components/Container';
 import Map from '@components/Map';
 import Button from '@components/Button';
+import Geojson from "@components/GeoJSON"
+import Sectors from "@components/Sectors"
+import Tooltips from "@components/Tooltips"
 
 import styles from '@styles/Home.module.scss';
+import {
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Select,
+  InputLabel,
+  MenuItem,
+} from "@mui/material";
 
 const DEFAULT_CENTER = [38.907132, -77.036546]
 
+import southPCT from "../../public/skinny.json";
+import northPCT from "../../public/northMerged.json";
+
+
+
+import logo from "../../public/logo.png";
+
 export default function Home() {
+
+  const [baseMap, setBaseMap] = React.useState(southPCT);
+  const [layers, setLayers] = React.useState([]);
+  const [sectors, setSectors] = React.useState({
+    showBUFFR: false,
+    showDCAFR: false,
+    showKRANT: false,
+    showLURAY: false,
+    showOJAAY: false,
+    showTYSON: false,
+    showWOOLY: false,
+  });
+
+  const handleMapSelectChange = (event) => {
+    setBaseMap(event.target.value);
+  };
+
+
+  // const handleCheckboxChange = (event) => {
+  //   const { checked, value } = event.currentTarget;
+
+  //   setLayers((prev) =>
+  //     checked ? [...prev, value] : prev.filter((val) => val !== value)
+  //   );
+  // };
+
   return (
-    <Layout>
-      <Head>
-        <title>Next.js Leaflet Starter</title>
-        <meta name="description" content="Create mapping apps with Next.js Leaflet Starter" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        style={{
+          display: "flex",
+          minWidth: "300px",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100vh",
+          backgroundColor: "#272727",
+          padding: "1rem",
+        }}
+      >
+        <FormGroup style={{ color: "#fff" }}>
+          <img
+            alt="Washington ARTCC Logo"
+            width="215"
+            height="39"
+            style={{ color: "transparent", margin: "1rem" }}
+            src="/logo.png"
+          />
+          <Select
+            variant="outlined"
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={baseMap}
+            onChange={handleMapSelectChange}
+            sx={{
+              border: "solid #ac2a2f",
+              color: "#fff",
+              "& .MuiSvgIcon-root": {
+                color: "white",
+              },
+              margin: "1rem",
+              "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  border: "none",
+                },
+            }}
+          >
+            <MenuItem value={northPCT}>North PCT</MenuItem>
+            <MenuItem value={southPCT}>South PCT</MenuItem>
+          </Select>
 
-      <Section>
-        <Container>
-          <h1 className={styles.title}>
-            Next.js Leaflet Starter
-          </h1>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"BUFFR"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showBUFFR: !prev.showBUFFR,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="BUFFR"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"DCAFR"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showDCAFR: !prev.showDCAFR,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="DCAFR"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"KRANT"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showKRANT: !prev.showKRANT,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="KRANT"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"LURAY"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showLURAY: !prev.showLURAY,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="LURAY"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"OJAAY"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showOJAAY: !prev.showOJAAY,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="OJAAY"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"TYSON"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showTYSON: !prev.showTYSON,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="TYSON"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={"WOOLY"}
+                onClick={() =>
+                  setSectors((prev) => ({
+                    ...prev,
+                    showWOOLY: !prev.showWOOLY,
+                  }))
+                }
+                style={{ color: "#ac2a2f" }}
+              />
+            }
+            label="WOOLY"
+          />
+        </FormGroup>
+      </div>
+      <Map
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+          }}
+          zoom={9.5}
+          zoomSnap={0.5}
+          center={[39, -77]}
+        >
+          <Geojson
+            key={JSON.stringify(baseMap)}
+            data={baseMap}
+            style={{ weight: 1 }}
+            interactive={false}
+          />
 
-          <Map className={styles.homeMap} width="800" height="400" center={DEFAULT_CENTER} zoom={12}>
-            {({ TileLayer, Marker, Popup }) => (
-              <>
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                <Marker position={DEFAULT_CENTER}>
-                  <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                  </Popup>
-                </Marker>
-              </>
-            )}
-          </Map>
+          <Sectors sectors={sectors} />
+          <Tooltips sectors={sectors} />
+        </Map>
 
-          <p className={styles.description}>
-            <code className={styles.code}>npx create-next-app -e https://github.com/colbyfayock/next-leaflet-starter</code>
-          </p>
+    </div>
+  );
 
-          <p className={styles.view}>
-            <Button href="https://github.com/colbyfayock/next-leaflet-starter">Vew on GitHub</Button>
-          </p>
-        </Container>
-      </Section>
-    </Layout>
-  )
+
 }
