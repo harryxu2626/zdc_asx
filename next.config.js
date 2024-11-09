@@ -3,6 +3,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 /** @type {import('next').NextConfig} */
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   // reactStrictMode: true,
   // webpack: (config) => {
@@ -18,9 +20,9 @@ const nextConfig = {
   //   )
   //   return config
   // }
-  basePath: '/harryxu2626.github.io',
+  basePath: isProd ? '/' : '',
+  assetPrefix: isProd ?  '/' : '',
   output: 'export',
-  distDir: '/dist',
   images: {
     unoptimized: true,
   }
