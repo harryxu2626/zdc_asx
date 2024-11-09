@@ -75,7 +75,7 @@ export default function Home() {
             width="215"
             height="39"
             style={{ color: "transparent", margin: "1rem" }}
-            src="/logo.png"
+            src="/harryxu2626.github.io/logo.png"
           />
           <Select
             variant="outlined"
