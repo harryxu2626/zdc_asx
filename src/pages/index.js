@@ -9,6 +9,7 @@ import Button from '@components/Button';
 import Geojson from "@components/GeoJSON"
 import Sectors from "@components/Sectors"
 import Tooltips from "@components/Tooltips"
+import SectorCheckboxes from '@components/Sectors/SectorCheckboxes';
 
 import styles from '@styles/Home.module.scss';
 import {
@@ -18,6 +19,7 @@ import {
   Select,
   InputLabel,
   MenuItem,
+  Typography
 } from "@mui/material";
 
 const DEFAULT_CENTER = [38.907132, -77.036546]
@@ -27,11 +29,12 @@ import northPCT from "../../public/northMerged.json";
 
 
 
-import logo from "../../public/logo.png";
+// import logo from "../../public/logo.png";
 
 export default function Home() {
 
   const [baseMap, setBaseMap] = React.useState(southPCT);
+  const [region, setRegion] = React.useState('SHD');
   const [layers, setLayers] = React.useState([]);
   const [sectors, setSectors] = React.useState({
     showBUFFR: false,
@@ -41,12 +44,22 @@ export default function Home() {
     showOJAAY: false,
     showTYSON: false,
     showWOOLY: false,
+    showBWIFS: false,
+    showGRACO: false,
   });
+  
 
   const handleMapSelectChange = (event) => {
-    setBaseMap(event.target.value);
-  };
+    setBaseMap(event.target.value)
+   
 
+    }
+
+  const handlePCTRegionChange = (event) => {
+      // Object.keys(sectors).forEach(v => sectors[v] = false)
+
+      setRegion(event.target.value);
+  }
 
   // const handleCheckboxChange = (event) => {
   //   const { checked, value } = event.currentTarget;
@@ -75,8 +88,9 @@ export default function Home() {
             width="215"
             height="39"
             style={{ color: "transparent", margin: "1rem" }}
-            src="/harryxu2626.github.io/logo.png"
+            src="/zdc_asx/logo.png"
           />
+          <Typography>Video Map</Typography>
           <Select
             variant="outlined"
             labelId="demo-simple-select-label"
@@ -99,112 +113,34 @@ export default function Home() {
             <MenuItem value={northPCT}>North PCT</MenuItem>
             <MenuItem value={southPCT}>South PCT</MenuItem>
           </Select>
+          <Typography>Sector Maps</Typography>
+          <Select
+            variant="outlined"
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={region}
+            onChange={handlePCTRegionChange}
+            sx={{
+              border: "solid #ac2a2f",
+              color: "#fff",
+              "& .MuiSvgIcon-root": {
+                color: "white",
+              },
+              margin: "1rem",
+              "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  border: "none",
+                },
+            }}
+          >
+            <MenuItem value={"SHD"}>SHD</MenuItem>
+            <MenuItem value={"CHP_EAST"}>CHP East</MenuItem>
+            <MenuItem value={"CHP_WEST"}>CHP West</MenuItem>
+          </Select>
 
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"BUFFR"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showBUFFR: !prev.showBUFFR,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="BUFFR"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"DCAFR"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showDCAFR: !prev.showDCAFR,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="DCAFR"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"KRANT"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showKRANT: !prev.showKRANT,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="KRANT"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"LURAY"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showLURAY: !prev.showLURAY,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="LURAY"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"OJAAY"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showOJAAY: !prev.showOJAAY,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="OJAAY"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"TYSON"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showTYSON: !prev.showTYSON,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="TYSON"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={"WOOLY"}
-                onClick={() =>
-                  setSectors((prev) => ({
-                    ...prev,
-                    showWOOLY: !prev.showWOOLY,
-                  }))
-                }
-                style={{ color: "#ac2a2f" }}
-              />
-            }
-            label="WOOLY"
-          />
+          <SectorCheckboxes setSectors={setSectors} region={region} sectors={sectors}/>
+
+         
         </FormGroup>
       </div>
       <Map
@@ -226,8 +162,8 @@ export default function Home() {
             interactive={false}
           />
 
-          <Sectors sectors={sectors} />
-          <Tooltips sectors={sectors} />
+          <Sectors sectors={sectors} region={region}/>
+          <Tooltips sectors={sectors} region={region}/>
         </Map>
 
     </div>

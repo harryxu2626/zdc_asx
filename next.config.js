@@ -20,8 +20,8 @@ const nextConfig = {
   //   )
   //   return config
   // }
-  basePath: isProd ? '/' : '',
-  assetPrefix: isProd ?  '/' : '',
+  basePath: isProd ? '/zdc_asx' : '',
+  assetPrefix: isProd ?  '/zdc_asx/' : '',
   output: 'export',
   images: {
     unoptimized: true,
