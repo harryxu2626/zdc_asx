@@ -1,17 +1,20 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import * as React from "react"
-import Layout from '@components/Layout';
-import Section from '@components/Section';
-import Container from '@components/Container';
-import Map from '@components/Map';
-import Button from '@components/Button';
-import Geojson from "@components/GeoJSON"
-import Sectors from "@components/Sectors"
-import Tooltips from "@components/Tooltips"
-import SectorCheckboxes from '@components/Sectors/SectorCheckboxes';
+import * as React from "react";
+import Layout from "@components/Layout";
+import Section from "@components/Section";
+import Container from "@components/Container";
+import Map from "@components/Map";
+// import Button from "@components/Button";
+import Geojson from "@components/GeoJSON";
+import Sectors from "@components/Sectors";
+import Tooltips from "@components/Tooltips";
+import SectorCheckboxes from "@components/Sectors/SectorCheckboxes";
+import ChangeMapZoom from "@components/Map/StaticChangeMapZoom";
 
-import styles from '@styles/Home.module.scss';
+import listOfSectors from "src/data/sectorObject";
+
+import styles from "@styles/Home.module.scss";
 import {
   FormGroup,
   FormControlLabel,
@@ -19,47 +22,65 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  Typography
+  Typography,
+  Button,
+  ButtonGroup,
 } from "@mui/material";
 
-const DEFAULT_CENTER = [38.907132, -77.036546]
+const DEFAULT_CENTER = [38.907132, -77.036546];
 
 import southPCT from "../../public/skinny.json";
 import northPCT from "../../public/northMerged.json";
-
-
+import centerMap from "../../public/center_boundary.json";
 
 // import logo from "../../public/logo.png";
 
 export default function Home() {
-
+  // const map = useMap();
   const [baseMap, setBaseMap] = React.useState(southPCT);
-  const [region, setRegion] = React.useState('SHD');
-  const [layers, setLayers] = React.useState([]);
-  const [sectors, setSectors] = React.useState({
-    showBUFFR: false,
-    showDCAFR: false,
-    showKRANT: false,
-    showLURAY: false,
-    showOJAAY: false,
-    showTYSON: false,
-    showWOOLY: false,
-    showBWIFS: false,
-    showGRACO: false,
-  });
-  
+  const [region, setRegion] = React.useState("CHP_EAST");
+  // const [layers, setLayers] = React.useState([]);
+  const [zoom, setZoom] = React.useState(9.5);
+  const [center, setCenter] = React.useState([39, -77]);
+  const [sectors, setSectors] = React.useState(listOfSectors.falseSectors);
 
   const handleMapSelectChange = (event) => {
-    setBaseMap(event.target.value)
-   
-
+    console.log(event.target.value.name);
+    if (event.target.value.name === "ZDC CTR BDRY") {
+      console.log("here");
+      setZoom(7.5);
+      setCenter([37, -76]);
+    } else {
+      setZoom(9.5);
+      setCenter([39, -77]);
     }
+    setBaseMap(event.target.value);
+  };
 
   const handlePCTRegionChange = (event) => {
-      // Object.keys(sectors).forEach(v => sectors[v] = false)
+    // Object.keys(sectors).forEach(v => sectors[v] = false)
 
-      setRegion(event.target.value);
-  }
+    setRegion(event.target.value);
+  };
+
+  const handleClearAll = () => {
+    setSectors(listOfSectors.falseSectors);
+  };
+
+  const handleSelectAll = () => {
+    switch(region){
+      case "CHP_EAST":
+      case "CHP_WEST":
+        setSectors(listOfSectors.chpTrueSectors);
+        break;
+      
+      case "SHD_NORTH":
+      case "SHD_SOUTH":
+        setSectors(listOfSectors.shdTrueSectors);
+        break;
+    }
+    // setSectors(listOfSectors.trueSectors);
+  };
 
   // const handleCheckboxChange = (event) => {
   //   const { checked, value } = event.currentTarget;
@@ -90,6 +111,7 @@ export default function Home() {
             style={{ color: "transparent", margin: "1rem" }}
             src="/zdc_asx/logo.png"
           />
+          <Typography variant="h6" color="red" style={{fontSize:'0.875rem',fontWeight:'bold',margin:`0 auto 0 auto`}}>NOT FOR REAL WORLD USE</Typography>
           <Typography>Video Map</Typography>
           <Select
             variant="outlined"
@@ -110,6 +132,7 @@ export default function Home() {
                 },
             }}
           >
+            <MenuItem value={centerMap}>Center</MenuItem>
             <MenuItem value={northPCT}>North PCT</MenuItem>
             <MenuItem value={southPCT}>South PCT</MenuItem>
           </Select>
@@ -133,41 +156,50 @@ export default function Home() {
                 },
             }}
           >
-            <MenuItem value={"SHD"}>SHD</MenuItem>
+            {/* <MenuItem value={"SHD"}>SHD</MenuItem> */}
             <MenuItem value={"CHP_EAST"}>CHP East</MenuItem>
             <MenuItem value={"CHP_WEST"}>CHP West</MenuItem>
+            <MenuItem value={"SHD_NORTH"}>SHD NORTH</MenuItem>
+            <MenuItem value={"SHD_SOUTH"}>SHD SOUTH</MenuItem>
           </Select>
 
-          <SectorCheckboxes setSectors={setSectors} region={region} sectors={sectors}/>
+          <ButtonGroup variant="contained" style={{margin: `0 auto 1rem auto`}}>
+            <Button style={{backgroundColor:'#500E0E', borderColor: '#500E0E'}} onClick={handleSelectAll}>Select All</Button>
+            <Button style={{backgroundColor:'#500E0E', borderColor: '#500E0E'}} onClick={handleClearAll}>Clear All</Button>
+          </ButtonGroup>
 
-         
+          <SectorCheckboxes
+            setSectors={setSectors}
+            region={region}
+            sectors={sectors}
+          />
         </FormGroup>
+        {/* <div> */}
+          <Typography variant="h6" color="red" style={{fontSize:'0.875rem',fontWeight:'bold',margin:`0 auto 0 auto`}}>NOT FOR REAL WORLD USE</Typography>
+        {/* </div> */}
       </div>
       <Map
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-          }}
-          zoom={9.5}
-          zoomSnap={0.5}
-          center={[39, -77]}
-        >
-          <Geojson
-            key={JSON.stringify(baseMap)}
-            data={baseMap}
-            style={{ weight: 1 }}
-            interactive={false}
-          />
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+        }}
+        zoomSnap={0.5}
+      >
+        <ChangeMapZoom coords={center} zoom={zoom} />
 
-          <Sectors sectors={sectors} region={region}/>
-          <Tooltips sectors={sectors} region={region}/>
-        </Map>
+        <Geojson
+          key={JSON.stringify(baseMap)}
+          data={baseMap}
+          style={{ weight: 1 }}
+          interactive={false}
+        />
 
+        <Sectors sectors={sectors} region={region} />
+        <Tooltips sectors={sectors} region={region} />
+      </Map>
     </div>
   );
-
-
 }

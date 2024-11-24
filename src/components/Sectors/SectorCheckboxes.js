@@ -158,7 +158,7 @@ const EastChpRegion = ({ setSectors, sectors }) => {
           <FormControlLabel
             control={
               <Checkbox
-              checked={sectors.showBWIFS}
+                checked={sectors.showBWIFS}
                 onClick={() =>
                   setSectors((prev) => ({
                     ...prev,
@@ -174,7 +174,7 @@ const EastChpRegion = ({ setSectors, sectors }) => {
           <FormControlLabel
             control={
               <Checkbox
-              checked={sectors.showGRACO}
+                checked={sectors.showGRACO}
                 onClick={() =>
                   setSectors((prev) => ({
                     ...prev,
@@ -190,7 +190,7 @@ const EastChpRegion = ({ setSectors, sectors }) => {
           <FormControlLabel
             control={
               <Checkbox
-              checked={sectors.showWOOLY}
+                checked={sectors.showWOOLY}
                 onClick={() =>
                   setSectors((prev) => ({
                     ...prev,
@@ -219,7 +219,7 @@ const WestChpRegion = ({ setSectors, sectors }) => {
       <FormControlLabel
         control={
           <Checkbox
-          checked={sectors.showBUFFR}
+            checked={sectors.showBUFFR}
             onClick={() =>
               setSectors((prev) => ({
                 ...prev,
@@ -235,7 +235,7 @@ const WestChpRegion = ({ setSectors, sectors }) => {
       <FormControlLabel
         control={
           <Checkbox
-          checked={sectors.showBWIFS}
+            checked={sectors.showBWIFS}
             onClick={() =>
               setSectors((prev) => ({
                 ...prev,
@@ -251,7 +251,7 @@ const WestChpRegion = ({ setSectors, sectors }) => {
       <FormControlLabel
         control={
           <Checkbox
-          checked={sectors.showGRACO}
+            checked={sectors.showGRACO}
             onClick={() =>
               setSectors((prev) => ({
                 ...prev,
@@ -267,7 +267,7 @@ const WestChpRegion = ({ setSectors, sectors }) => {
       <FormControlLabel
         control={
           <Checkbox
-          checked={sectors.showWOOLY}
+            checked={sectors.showWOOLY}
             onClick={() =>
               setSectors((prev) => ({
                 ...prev,
@@ -283,6 +283,220 @@ const WestChpRegion = ({ setSectors, sectors }) => {
   );
 };
 
+const NorthShdRegion = ({ setSectors, sectors }) => {
+  // const [chpSectors,setChpSectors] = React.useState({});
+
+  // React.useEffect(()=>{
+  //     setChpSectors(sectors);
+  // },[sectors])
+  return (
+    <>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showASPER}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showASPER: !prev.showASPER,
+              }))
+            }
+            style={{ color: "#9e0059" }}
+          />
+        }
+        label="ASPER NORTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showBARIN}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showBARIN: !prev.showBARIN,
+              }))
+            }
+            style={{ color: "#ff6b6b" }}
+          />
+        }
+        label="BARIN NORTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showIADFE}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showIADFE: !prev.showIADFE,
+              }))
+            }
+            style={{ color: "#f8961e" }}
+          />
+        }
+        label="IADFE NORTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showIADFW}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showIADFW: !prev.showIADFW,
+              }))
+            }
+            style={{ color: "#f9c74f" }}
+          />
+        }
+        label="IADFW NORTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showMANNE}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showMANNE: !prev.showMANNE,
+              }))
+            }
+            style={{ color: "#90be6d" }}
+          />
+        }
+        label="MANNE NORTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showMULRR}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showMULRR: !prev.showMULRR,
+              }))
+            }
+            style={{ color: "#43aa8b" }}
+          />
+        }
+        label="MULRR NORTH"
+      />
+    </>
+  );
+};
+
+const SouthShdRegion = ({ setSectors, sectors }) => {
+  // const [chpSectors,setChpSectors] = React.useState({});
+
+  // React.useEffect(()=>{
+  //     setChpSectors(sectors);
+  // },[sectors])
+  return (
+    <>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showASPER}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showASPER: !prev.showASPER,
+              }))
+            }
+            style={{ color: "#9e0059" }}
+          />
+        }
+        label="ASPER SOUTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showBARIN}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showBARIN: !prev.showBARIN,
+              }))
+            }
+            style={{ color: "#ff6b6b" }}
+          />
+        }
+        label="BARIN SOUTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showIADFE}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showIADFE: !prev.showIADFE,
+              }))
+            }
+            style={{ color: "#f8961e" }}
+          />
+        }
+        label="IADFE SOUTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showIADFW}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showIADFW: !prev.showIADFW,
+              }))
+            }
+            style={{ color: "#f9c74f" }}
+          />
+        }
+        label="IADFW SOUTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showMANNE}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showMANNE: !prev.showMANNE,
+              }))
+            }
+            style={{ color: "#90be6d" }}
+          />
+        }
+        label="MANNE SOUTH"
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={sectors.showMULRR}
+            onClick={() =>
+              setSectors((prev) => ({
+                ...prev,
+                showMULRR: !prev.showMULRR,
+              }))
+            }
+            style={{ color: "#43aa8b" }}
+          />
+        }
+        label="MULRR SOUTH"
+      />
+    </>
+  );
+};
+
 const SectorCheckboxes = ({ setSectors, region, sectors }) => {
   // console.log(region);
   // console.log(sectors);
@@ -291,6 +505,10 @@ const SectorCheckboxes = ({ setSectors, region, sectors }) => {
       return <EastChpRegion setSectors={setSectors} sectors={sectors} />;
     case "CHP_WEST":
       return <WestChpRegion setSectors={setSectors} sectors={sectors} />;
+    case "SHD_NORTH":
+      return <NorthShdRegion setSectors={setSectors} sectors={sectors} />;
+    case "SHD_SOUTH":
+      return <SouthShdRegion setSectors={setSectors} sectors={sectors} />;
     default:
       return <PctRegion setSectors={setSectors} sectors={sectors} />;
   }
