@@ -1,11 +1,4 @@
-import buffr from "../../public/BUFFR_CHP.json";
-import dcafr from "../../public/DCAFR.json";
-import krant from "../../public/KRANT.json";
-import luray from "../../public/LURAY.json";
-import ojaay from "../../public/ojaay.json";
-import tyson from "../../public/TYSON.json";
-import wooly from "../../public/WOOLY.json";
-
+import buffr from "../../public/BUFFR.json";
 import bwifsEast from "../../public/BWIFS_EAST.json";
 import bwifsWest from "../../public/BWIFS_WEST.json";
 import gracoEast from "../../public/GRACO_EAST.json";
@@ -26,31 +19,114 @@ import manneSouth from "../../public/MANNE_SOUTH.json";
 import mulrrNorth from "../../public/MULRR_NORTH.json";
 import mulrrSouth from "../../public/MULRR_SOUTH.json";
 
+import dcafrNorth from "../../public/DCAFR_NORTH.json";
+import dcafrSouth from "../../public/DCAFR_SOUTH.json";
+import krantNorth from "../../public/KRANT_NORTH.json";
+import krantSouth from "../../public/KRANT_SOUTH.json";
+import luray from "../../public/LURAY.json";
+import ojaayNorth from "../../public/OJAAY_NORTH.json";
+import ojaaySouth from "../../public/OJAAY_SOUTH.json";
+import tysonNorth from "../../public/TYSON_NORTH.json";
+import tysonSouth from "../../public/TYSON_SOUTH.json";
 
-export default {
-    buffr,
-    dcafr,
-    krant,
-    luray,
-    ojaay,
-    tyson,
-    wooly,
-    bwifsEast,
-    bwifsWest,
-    gracoEast,
-    gracoWest,
-    woolyEast,
-    woolyWest,
-    asperNorth,
-    asperSouth,
-    barinNorth,
-    barinSouth,
-    iadfeNorth,
-    iadfeSouth,
-    iadfwNorth,
-    iadfwSouth,
-    manneNorth,
-    manneSouth,
-    mulrrNorth,
-    mulrrSouth
+import choea from "../../public/CHOEA.json"
+import chowe from "../../public/CHOWE.json"
+import cside from "../../public/CSIDE.json"
+import csidw from "../../public/CSIDW.json"
+import fltrkNorth from "../../public/FLTRK_NORTH.json"
+import fltrkSouth from "../../public/FLTRK_SOUTH.json"
+import ricfrNorth from "../../public/RICFR_NORTH.json"
+import ricfrSouth from "../../public/RICFR_SOUTH.json"
+import tappaNorth from "../../public/TAPPA_NORTH.json"
+import tappaSouth from "../../public/TAPPA_SOUTH.json"
+
+export const chpJSON = {
+  buffr,
+  bwifsEast,
+  bwifsWest,
+  gracoEast,
+  gracoWest,
+  woolyEast,
+  woolyWest,
 }
+
+export const shdJSON = {
+  asperNorth,
+  asperSouth,
+  barinNorth,
+  barinSouth,
+  iadfeNorth,
+  iadfeSouth,
+  iadfwNorth,
+  iadfwSouth,
+  manneNorth,
+  manneSouth,
+  mulrrNorth,
+  mulrrSouth,
+}
+
+export const mtvJSON = {
+  dcafrNorth,
+  dcafrSouth,
+  krantNorth,
+  krantSouth,
+  luray,
+  ojaayNorth,
+  ojaaySouth,
+  tysonNorth,
+  tysonSouth,
+}
+
+export const jrvJSON = {
+  choea,
+  chowe,
+  cside,
+  csidw,
+  fltrkNorth,
+  fltrkSouth,
+  ricfrNorth,
+  ricfrSouth,
+  tappaNorth,
+  tappaSouth
+}
+
+// export default {
+//   buffr,
+//   bwifsEast,
+//   bwifsWest,
+//   gracoEast,
+//   gracoWest,
+//   woolyEast,
+//   woolyWest,
+//   asperNorth,
+//   asperSouth,
+//   barinNorth,
+//   barinSouth,
+//   iadfeNorth,
+//   iadfeSouth,
+//   iadfwNorth,
+//   iadfwSouth,
+//   manneNorth,
+//   manneSouth,
+//   mulrrNorth,
+//   mulrrSouth,
+//   dcafrNorth,
+//   dcafrSouth,
+//   krantNorth,
+//   krantSouth,
+//   luray,
+//   ojaayNorth,
+//   ojaaySouth,
+//   tysonNorth,
+//   tysonSouth,
+//   choea,
+//   chowe,
+//   cside,
+//   csidw,
+//   fltrkNorth,
+//   fltrkSouth,
+//   ricfrNorth,
+//   ricfrSouth,
+//   tappaNorth,
+//   tappaSouth
+// };

@@ -15,9 +15,10 @@ import L from "leaflet";
 
 import * as leafletPip from "@mapbox/leaflet-pip";
 
-import * as sectorJSON from "../../data/sectorJSON";
+import {chpJSON, shdJSON, mtvJSON, jrvJSON } from "../../data/sectorJSON";
 
 import {TooltipConditional} from "./tooltipConditional";
+import shdSectors from "@components/Sectors/ShdSectors";
 
 const Tooltips = (params) => {
   const map = useMap();
@@ -37,16 +38,30 @@ const Tooltips = (params) => {
   useEffect(() => {
     if (!lat) return;
     // setTooltip([]);
-
-    for (const sectors in sectorJSON.default){
-      // console.log(sectors)
+    // console.log(chpJSON)
+    for (const sectors in chpJSON){
+      // console.log(chpJSON[sectors])
       // console.log(sectors.substring(0,5).toUpperCase())
       // console.log(params.sectors['show'+sectors.substring(0,5).toUpperCase()])
-
-
       // console.log(sectorJSON.default[sectors])
-      TooltipConditional(tooltip, [lng,lat], sectorJSON.default[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region)
+      TooltipConditional(tooltip, [lng,lat], chpJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.chpOps)
     }
+
+    // for (const sectors in shdJSON){
+    //   // console.log(shdJSON[sectors])
+    //   TooltipConditional(tooltip, [lng,lat], shdJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.shdOps)
+    // }
+
+    for (const sectors in mtvJSON){
+      console.log(sectors)
+      console.log(mtvJSON[sectors])
+      TooltipConditional(tooltip, [lng,lat], mtvJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.mtvOps)
+    }
+
+    // for (const sectors in jrvJSON){
+    //   // console.log(jrvJSON[sectors])
+    //   TooltipConditional(tooltip, [lng,lat], jrvJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.jrvOps)
+    // }
 
        
     console.log(tooltip);

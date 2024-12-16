@@ -13,21 +13,31 @@ import { Typography } from "@mui/material";
 
 import L from "leaflet";
 
-import * as leafletPip from "@mapbox/leaflet-pip";
+import leafletPip from "@mapbox/leaflet-pip";
 
 export function TooltipConditional(tooltip, lngLat, sector, showSector, region){
-    console.log(sector.name.split(' ')[1])
-    console.log(region.split('_')[1])
+    // console.log(sector.name?.split(' ')[1])
+    // console.log(region.split('_')[1])
 
-    if (sector.name.split(' ')[1] !== region.split('_')[1] && sector.name.split(' ')[0] !== "BUFFR"){
+    if (sector.name?.split(' ')[1] !== region.split('_')[1] && !["BUFFR" ,"LURAY" ,"CHOEA" ,"CHOWE" ,"CSIDE","CSIDW"].includes(sector.name?.split(' ')[0])){
         return
     }
     // console.log(params.sector)
 
-    var hover = leafletPip.pointInLayer(lngLat, L.geoJson(sector));
+    // console.log(L.geoJson(sector))
+    // leafletPip.pointInLayer([1,1],L.geoJSON(sector))
+
+    console.log(sector)
+    console.log(lngLat)
+    console.log(L.geoJson(sector))
+    console.log(leafletPip.pointInLayer(lngLat,L.geoJson(sector)))
+
+    var hover = leafletPip.pointInLayer(lngLat,L.geoJson(sector))
 
     if (hover.length && showSector) {
-
+        console.log(hover[0]?.feature.properties)
+        console.log(Object.entries(hover[0]?.feature.properties).filter(([k, v]) => v !== null && k !== "fid"))
+        
         let lowAlt = Object.entries(hover[0]?.feature.properties)
         .filter(([k, v]) => v !== null && k !== "fid")[0][0]
         .split(" ")

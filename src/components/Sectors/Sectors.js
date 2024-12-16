@@ -5,12 +5,49 @@ const DynamicSectors = dynamic(() => import('./DynamicSectors'), {
 });
 
 
+const DynamicChpSectors = dynamic(() => import('./ChpSectors'), {
+  ssr: false
+});
 
-const Sectors = (props) => {
+const DynamicShdSectors = dynamic(() => import('./ShdSectors'), {
+  ssr: false
+});
+
+const DynamicMtvSectors = dynamic(() => import('./MtvSectors'), {
+  ssr: false
+});
+
+const DynamicJrvSectors = dynamic(() => import('./JrvSectors'), {
+  ssr: false
+});
+
+
+
+export const ChpSectors = (props) => {
   return (
-    <DynamicSectors {...props} />
+    <DynamicChpSectors {...props} />
 
   )
 }
 
-export default Sectors;
+export const ShdSectors = (props) => {
+  return (
+    <DynamicShdSectors {...props} />
+
+  )
+}
+
+export const MtvSectors = (props) => {
+  return (
+    <DynamicMtvSectors {...props} />
+
+  )
+}
+
+export const JrvSectors = (props) => {
+  return (
+    <DynamicJrvSectors {...props} />
+
+  )
+}
+
