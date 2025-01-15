@@ -13,6 +13,7 @@ import SectorCheckboxes from "@components/Sectors/SectorCheckboxes";
 import ChangeMapZoom from "@components/Map/StaticChangeMapZoom";
 
 import listOfSectors from "src/data/sectorObject";
+import InsertMaptiler from "@components/Maptiler/InsertMaptiler";
 
 import styles from "@styles/Home.module.scss";
 import {
@@ -363,6 +364,7 @@ export default function Home() {
         zoomSnap={0.1}
       >
         <ChangeMapZoom coords={center} zoom={zoom} />
+        <InsertMaptiler/>
 
         <Geojson
           key={JSON.stringify(baseMap)}
