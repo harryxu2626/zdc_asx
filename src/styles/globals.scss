@@ -20,3 +20,16 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+::-webkit-scrollbar-thumb {
+  background: #afafaf;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
