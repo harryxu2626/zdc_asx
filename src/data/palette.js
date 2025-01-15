@@ -6,20 +6,20 @@ export const chpPalette = [
 ]
 
 export const shdPalette = [
-  "#845ec2",
-  "#d65db1",
-  "#ff6f91",
-  "#ff9671",
-  "#ff9671",
-  "#f9f871"
+  "#36a1d3",
+  "#156579",
+  "#e65f5c",
+  "#ffa033",
+  "#2338a9",
+  "#8f4baa"
 ]
 
 export const mtvPalette = [
-  "#005b6a",
-  "#007e7f",
-  "#1ba087",
-  "#61c282",
-  "#a8df77"
+  "#ffbc42",
+  "#d81159",
+  "#8f2d56",
+  "#218380",
+  "#73d2de"
 ]
 
 export const jrvPalette = [
