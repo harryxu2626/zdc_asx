@@ -27,8 +27,6 @@ const Map = ({ children, className, width, height, ...rest }) => {
     })();
   }, []);
 
-  const key = 'pV3tPWLAYGjWrH4cybZ';
-
   return (
     <MapContainer className={mapClassName} {...rest}>        
       {children}

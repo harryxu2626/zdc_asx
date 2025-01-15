@@ -3,6 +3,7 @@ import { GeoJSON } from "react-leaflet";
 
 import { chpJSON } from "../../data/sectorJSON";
 import { chpPalette } from "src/data/palette";
+import { geoJson, latLng, marker } from "leaflet";
 
 const EastChpSectors = (params) => {
   console.log(params.region);
@@ -81,6 +82,7 @@ const WestChpSectors = (params) => {
     </>
   );
 };
+
 
 const chpSectors = (params) => {
   switch (params.region) {

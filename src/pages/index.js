@@ -55,6 +55,7 @@ import {
 export default function Home() {
   // const map = useMap();
   const [baseMap, setBaseMap] = React.useState(southPCT);
+  const [mapAutoPan, setMapAutoPan] = React.useState(false);
   const [region, setRegion] = React.useState("CHP_EAST");
   const [chpOps, setChpOps] = React.useState("CHP_WEST");
   const [shdOps, setShdOps] = React.useState("SHD_SOUTH");
@@ -72,10 +73,13 @@ export default function Home() {
       // console.log("here");
       setZoom(7.5);
       setCenter([37, -76]);
+      setMapAutoPan(true);
     } else {
       setZoom(9.5);
       setCenter([39, -77]);
+      setMapAutoPan(true);
     }
+
     setBaseMap(event.target.value);
   };
 
@@ -362,9 +366,12 @@ export default function Home() {
           position: "absolute",
         }}
         zoomSnap={0.1}
+        center={[39,-77]}
+        zoom={9.5}
       >
-        <ChangeMapZoom coords={center} zoom={zoom} />
-        <InsertMaptiler/>
+        {mapAutoPan && <ChangeMapZoom coords={center} zoom={zoom} setMapAutoPan={setMapAutoPan} />}
+        
+        {/* <InsertMaptiler/> */}
 
         <Geojson
           key={JSON.stringify(baseMap)}

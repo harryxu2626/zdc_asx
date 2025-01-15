@@ -47,21 +47,21 @@ const Tooltips = (params) => {
       TooltipConditional(tooltip, [lng,lat], chpJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.chpOps)
     }
 
-    // for (const sectors in shdJSON){
-    //   // console.log(shdJSON[sectors])
-    //   TooltipConditional(tooltip, [lng,lat], shdJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.shdOps)
-    // }
+    for (const sectors in shdJSON){
+      // console.log(shdJSON[sectors])
+      TooltipConditional(tooltip, [lng,lat], shdJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.shdOps)
+    }
 
     for (const sectors in mtvJSON){
-      console.log(sectors)
-      console.log(mtvJSON[sectors])
+      // console.log(sectors)
+      // console.log(mtvJSON[sectors])
       TooltipConditional(tooltip, [lng,lat], mtvJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.mtvOps)
     }
 
-    // for (const sectors in jrvJSON){
-    //   // console.log(jrvJSON[sectors])
-    //   TooltipConditional(tooltip, [lng,lat], jrvJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.jrvOps)
-    // }
+    for (const sectors in jrvJSON){
+      // console.log(jrvJSON[sectors])
+      TooltipConditional(tooltip, [lng,lat], jrvJSON[sectors], params.sectors['show'+sectors.substring(0,5).toUpperCase()],params.region.jrvOps)
+    }
 
        
     console.log(tooltip);
@@ -100,7 +100,7 @@ const Tooltips = (params) => {
             display: "flex",
             flexDirection:"column",
             minWidth: "1vw",
-            maxWidth: "250px",
+            maxWidth: "350px",
             minHeight: "1vw",
             position: "fixed",
             right: 0,
@@ -116,11 +116,14 @@ const Tooltips = (params) => {
         >
           {tooltip.map((item) => {
             return (
-
-              <Typography key={item.sector}>
+              <>
+              {item.mixedAltitude ? <Typography key={item.sector}>
+                {item.sector}: {item.mixedAltitude}
+              </Typography>: <Typography key={item.sector+"a"}>
                 {item.sector}: {item.lowAltitude===0 ? "SFC" : item.lowAltitude} {item.highAltitude ? item.highAltitude : ''}
-              </Typography>
-   
+              </Typography>}
+              
+              </>
             );
           })}
         </div>

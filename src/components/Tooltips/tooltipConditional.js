@@ -27,38 +27,43 @@ export function TooltipConditional(tooltip, lngLat, sector, showSector, region){
     // console.log(L.geoJson(sector))
     // leafletPip.pointInLayer([1,1],L.geoJSON(sector))
 
-    console.log(sector)
-    console.log(lngLat)
-    console.log(L.geoJson(sector))
-    console.log(leafletPip.pointInLayer(lngLat,L.geoJson(sector)))
+    // console.log(sector)
+    // console.log(lngLat)
+    // console.log(L.geoJson(sector))
+    // console.log(leafletPip.pointInLayer(lngLat,L.geoJson(sector)))
 
     var hover = leafletPip.pointInLayer(lngLat,L.geoJson(sector))
 
     if (hover.length && showSector) {
         console.log(hover[0]?.feature.properties)
         console.log(Object.entries(hover[0]?.feature.properties).filter(([k, v]) => v !== null && k !== "fid"))
+        const altitudeShelves = Object.entries(hover[0]?.feature.properties).filter(([k, v]) => v !== null && k !== "fid");
+
+          let lowAlt = Object.entries(hover[0]?.feature.properties)
+          .filter(([k, v]) => v !== null && k !== "fid")[0][0]
+          .split(" ")
+          .reverse()[0];
+          
+    
+          let data = hover[0] ? {
+            sector: sector.name,
+            lowAltitude: lowAlt === "SFC" ? 0 : Number(lowAlt),
+            highAltitude: Number(Object.entries(hover[0]?.feature.properties)
+              .filter(([k, v]) => v !== null && k !== "fid")[0][0]
+              .split(" ")
+              .reverse()[1]),
+            mixedAltitude: altitudeShelves.length > 1 ? altitudeShelves[0][1].split(" ").reverse().join(" ") : null
+          } : '';
+
+
+    
+          let index = tooltip.findIndex((item) => item.sector === sector.name);
+          if (index === -1) {
+            tooltip.push(data);
+          } else {
+            tooltip[index] = data;
+          }
         
-        let lowAlt = Object.entries(hover[0]?.feature.properties)
-        .filter(([k, v]) => v !== null && k !== "fid")[0][0]
-        .split(" ")
-        .reverse()[0];
-        
-  
-        let data = hover[0] ? {
-          sector: sector.name,
-          lowAltitude: lowAlt === "SFC" ? 0 : Number(lowAlt),
-          highAltitude: Number(Object.entries(hover[0]?.feature.properties)
-            .filter(([k, v]) => v !== null && k !== "fid")[0][0]
-            .split(" ")
-            .reverse()[1]),
-        } : '';
-  
-        let index = tooltip.findIndex((item) => item.sector === sector.name);
-        if (index === -1) {
-          tooltip.push(data);
-        } else {
-          tooltip[index] = data;
-        }
       }else{
         let index = tooltip.findIndex((item) => item.sector === sector.name);
         if (index > -1){
