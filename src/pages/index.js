@@ -30,9 +30,10 @@ import {
 
 const DEFAULT_CENTER = [38.907132, -77.036546];
 
-import southPCT from "../../public/skinny.json";
+import southPCT from "../../public/southMerged.json";
 import northPCT from "../../public/northMerged.json";
 import centerMap from "../../public/center_boundary.json";
+
 
 import {
   chpCheckboxes,
